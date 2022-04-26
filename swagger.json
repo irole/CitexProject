@@ -9,11 +9,15 @@
       "url": "https://opensource.org/licenses/MIT"
     }
   },
-  "host": "192.168.1.22:3001",
+  "host": "localhost:3001",
   "basePath": "/",
   "tags": [
     {
       "name": "Auth",
+      "description": ""
+    },
+    {
+      "name": "user",
       "description": ""
     }
   ],
@@ -35,16 +39,25 @@
         "summary": "Register user",
         "parameters": [
           {
-            "name": "email password",
+            "name": "mobile password rePassword age name",
             "in": "body",
-            "description": "this values get email and password",
+            "description": "insert your values",
             "schema": {
               "type": "object",
               "properties": {
-                "email": {
+                "mobile": {
                   "type": "string"
                 },
                 "password": {
+                  "type": "string"
+                },
+                "rePassword": {
+                  "type": "string"
+                },
+                "age": {
+                  "type": "number"
+                },
+                "name": {
                   "type": "string"
                 }
               }
@@ -66,16 +79,16 @@
         "tags": [
           "Auth"
         ],
-        "summary": "Register user",
+        "summary": "login user",
         "parameters": [
           {
-            "name": "email password",
+            "name": "mobile password",
             "in": "body",
-            "description": "this values get email and password",
+            "description": "this values get mobile and password",
             "schema": {
               "type": "object",
               "properties": {
-                "email": {
+                "mobile": {
                   "type": "string"
                 },
                 "password": {
@@ -99,11 +112,11 @@
   "definitions": {
     "user": {
       "required": [
-        "email",
+        "mobile",
         "password"
       ],
       "properties": {
-        "email": {
+        "mobile": {
           "type": "string",
           "uniqueItems": true
         },
@@ -122,11 +135,11 @@
     },
     "resetPassword": {
       "required": [
-        "email",
+        "mobile",
         "token"
       ],
       "properties": {
-        "email": {
+        "mobile": {
           "type": "string"
         },
         "token": {

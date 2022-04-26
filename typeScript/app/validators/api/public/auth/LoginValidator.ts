@@ -8,20 +8,20 @@ class LoginValidator extends Validator {
 
     handle() {
         return [
-            body('email')
-            .trim()
-            .escape()
-            .isEmail()
-            .withMessage((value, {req, location, path}) => {
-                return translate(req,__filename,'email-validate','email not valid');
-            }),
+            body('mobile')
+                .trim()
+                .escape()
+                .matches(/^(\+98?)?{?(0?9[0-9]{9,9}}?)$/, "g")
+                .withMessage((value, {req, location, path}) => {
+                    return translate(req, __filename, 'number-valid', 'your phone number format not valid');
+                }),
             body('password')
-            .trim()
-            .escape()
-            .isLength({min: 8})
-            .withMessage((value, {req, location, path}) => {
-                return translate(req,__filename,'password-valid','password must more than 8 characters');
-            }),
+                .trim()
+                .escape()
+                .isLength({min: 8})
+                .withMessage((value, {req, location, path}) => {
+                    return translate(req, __filename, 'password-valid', 'password must more than 8 characters');
+                })
         ];
     }
 }

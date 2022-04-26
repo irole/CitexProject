@@ -11,8 +11,30 @@
 					"auth": {
 						"RegisterValidator": {
 							"email-validate": "email not valid",
-							"password-valid": "password must more than 8 characters",
-							"email-exist": "this email registered before"
+							"password-valid": "password must be longer than 8 characters and should contain at least a number, an Uppercase alphabet and a lowercase alphabet.",
+							"email-exist": "this email registered before",
+							"number-valid": "your phone number format not valid",
+							"password-not-confirm": "password Confirmation Dose not not match password",
+							"first-name-required": "firstname is required",
+							"age-required": "age is required",
+							"mobile-exist": "this mobile Number registered before",
+							"age-max": "your age must lower than 80 years old",
+							"age-min": "your age must more than 18 years old",
+							"first-name-min-length": "firstname should be more than 2 characters",
+							"age-number": "age must be a number"
+						},
+						"LoginValidator": {
+							"number-valid": "your phone number format not valid",
+							"password-valid": "password must more than 8 characters"
+						}
+					}
+				},
+				"private": {
+					"user": {
+						"UpdateInformationValidator": {
+							"number-valid": "your phone number format not valid",
+							"first-name-required": "firstname is required",
+							"age-required": "age is required"
 						}
 					}
 				}
@@ -21,11 +43,12 @@
 		"controllers": {
 			"auth": {
 				"RegisterController": {
-					"process-register-success": "Register Success!"
+					"process-register-success": "Register Success!",
+					"process-conflict-email": "this mobile number is registered before!"
 				},
 				"LoginController": {
 					"process-login-success": "login Success!",
-					"process-inf-wrong": "username or password is wrong!"
+					"process-inf-wrong": "mobile number or password is wrong!"
 				}
 			}
 		}

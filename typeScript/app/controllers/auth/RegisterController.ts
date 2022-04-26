@@ -16,10 +16,10 @@ class RegisterController extends Controller {
     async process(req, res, next) {
         try {
             // get email from body
-            const email = req.body.email;
+            req.body.mobile = this.rebuildMobileNumber(req.body.mobile)
             // Check User Exist
-            const result = await userService.checkUserExistWithEmail(email);
-            if (result) throw new ConflictError(translate(req,__filename,'process-conflict-email','this email is registered before!'));
+            const result = await userService.checkUserExistWithMobile(req.body.mobile);
+            if (result) throw new ConflictError(translate(req,__filename,'process-conflict-email','this mobile number is registered before!'));
             passport.authenticate('local.register', {session: false}, (err, user) => {
                 // When res have Error
                 if (err) return next(new ServerError(translate(req,__filename,'process-server-error','server have Error !')));

@@ -18,9 +18,14 @@ export default class Controller extends ApiController {
                 maxAge,
                 httpOnly: true
             });
+            if (statusCode === 201) {
+                return this.success({
+                    id: user.id,
+                    mobile: user.mobile
+                }, res, statusCode);
+            }
             return this.success({
-                message,
-                token,
+                accessToken:token
             }, res, statusCode);
         });
     }

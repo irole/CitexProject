@@ -5,7 +5,7 @@ const bcrypt = require('bcrypt');
 // Service
 import Service from "./Service";
 // Model
-import User from "../models/user";
+import User from "../models/person";
 
 class UserService extends Service {
 
@@ -55,11 +55,13 @@ class UserService extends Service {
         }
     }
 
-    async registerProcess(email, password) {
+    async registerProcess(mobile, password,name,age) {
         // Create new user
         const newUser = await new this.model({
-            email,
+            mobile,
             password: this.bcryptPassword(password),
+            name,
+            age
         });
         const user = await newUser.save();
         // when user not created send 500
@@ -67,11 +69,10 @@ class UserService extends Service {
         return user;
     }
 
-    async checkUserExistWithEmail(email) {
-        const result = await this.findOne({email});
+    async checkUserExistWithMobile(mobile) {
+        const result = await this.findOne({mobile});
         return !!result;
     }
-
 }
 
 export default new UserService();

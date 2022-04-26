@@ -3,7 +3,9 @@ const {Schema} = mongoose;
 const bcrypt = require('bcrypt');
 
 const userSchema = Schema({
-    email: {type: String, unique: true, required: true},
+    name: {type: String, required: true},
+    age: {type: Number, required: true},
+    mobile: {type: String, unique: true, required: true},
     password: {type: String, required: true},
     admin: {type: Boolean, default: false},
 }, {
@@ -22,4 +24,4 @@ userSchema.methods.comparePassword = function (password: any) {
     return bcrypt.compareSync(password, this.password);
 };
 
-export default mongoose.model('User', userSchema);
+export default mongoose.model('Person', userSchema);
