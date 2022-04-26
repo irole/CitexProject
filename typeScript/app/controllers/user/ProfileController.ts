@@ -1,6 +1,5 @@
 // Controllers
 import Controller from "./Controller";
-import {throws} from "assert";
 import {ClientError} from "../../errors/ClientError";
 import UserService from "../../services/UserService";
 import userService from "../../services/UserService";
@@ -10,8 +9,8 @@ class ProfileController extends Controller {
 
     async index(req, res, next) {
         try {
-            const id = req.params.id;
-            if (id !== req.user.id) throw new ClientError("you are not access to this page ", 403)
+            const id = req.params.userId;
+            if (id !== req.user.id) throw new ClientError("you are not access to this page ", 403);
             return res.json({
                 name: req.user.name,
                 age: req.user.age,
@@ -24,8 +23,8 @@ class ProfileController extends Controller {
 
     async destroy(req, res, next) {
         try {
-            const id = req.params.id;
-            if (id !== req.user.id) throw new ClientError("you are not access to this page ", 403)
+            const id = req.params.userId;
+            if (id !== req.user.id) throw new ClientError("you are not access to this page ", 403);
             await UserService.remove(req.user.id);
             return this.success({msg: "user deleted"}, res, 200)
         } catch (e) {
@@ -35,10 +34,10 @@ class ProfileController extends Controller {
 
     async update(req, res, next) {
         try {
-            const id = req.params.id;
-            if (id !== req.user.id) throw new ClientError("you are not access to this page ", 403)
+            const id = req.params.userId;
+            if (id !== req.user.id) throw new ClientError("you are not access to this page ", 403);
             let {name, mobile, age, password} = req.body;
-            mobile = this.rebuildMobileNumber(mobile)
+            mobile = this.rebuildMobileNumber(mobile);
             if (name === "") name = req.user.name;
             if (mobile === "") mobile = req.user.mobile;
             if (age === "") age = req.user.age;
@@ -47,18 +46,17 @@ class ProfileController extends Controller {
             } else {
                 password = await userService.bcryptPassword(password)
             }
-            await userService.findOneAndUpdate({id: req.params.id}, {
+            await userService.findOneAndUpdate({id: req.params.userId}, {
                 name,
                 age,
                 mobile,
                 password
             })
-            return this.success({msg: "user information updated successfully"}, res, 200)
+            return this.success({msg: "user information updated successfully"}, res, 200);
 
         } catch (e) {
             next(e);
         }
-
     }
 }
 

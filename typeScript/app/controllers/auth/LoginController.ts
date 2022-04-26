@@ -1,4 +1,3 @@
-import express from 'express';
 import {ClientError} from '../../errors/ClientError';
 
 // Packages
@@ -11,8 +10,8 @@ class LoginController extends Controller {
 
     async process(req, res, next) {
         try {
-            // get email from body
-            req.body.mobile = this.rebuildMobileNumber(req.body.mobile)
+            // get mobile from body
+            req.body.mobile = this.rebuildMobileNumber(req.body.mobile);
             passport.authenticate('local.login', {session: false}, (err, user) => {
                 // When res have Error
                 if (err) return next(new ClientError(translate(req, __filename, 'process-inf-wrong', 'mobile number or password is wrong!'), 401));

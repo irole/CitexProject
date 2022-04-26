@@ -1,4 +1,3 @@
-import express from 'express';
 // Packages
 const passport = require('passport');
 // Controllers
@@ -15,8 +14,8 @@ class RegisterController extends Controller {
 
     async process(req, res, next) {
         try {
-            // get email from body
-            req.body.mobile = this.rebuildMobileNumber(req.body.mobile)
+            // get mobile from body
+            req.body.mobile = this.rebuildMobileNumber(req.body.mobile);
             // Check User Exist
             const result = await userService.checkUserExistWithMobile(req.body.mobile);
             if (result) throw new ConflictError(translate(req,__filename,'process-conflict-email','this mobile number is registered before!'));

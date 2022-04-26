@@ -1,4 +1,3 @@
-import express from "express";
 const config = require('config');
 //LOCAL
 // const MongoStore = require('connect-mongo').default;

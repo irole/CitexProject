@@ -9,9 +9,8 @@ import registerValidator from "../../validators/api/public/auth/RegisterValidato
 import validateRequest from "../../middlewares/ValidateRequest";
 
 
-router.get('/:id', ProfileController.index);
-router.delete('/:id/delete', ProfileController.destroy);
-router.put('/:id/update',registerValidator.handle(), validateRequest.handle, ProfileController.update);
-// router.put('/:id/update', registerValidator.handle(), validateRequest.handle, ProfileController.update);
+router.get('/:userId', ProfileController.index);
+router.delete('/:userId', ProfileController.destroy);
+router.put('/:userId',registerValidator.handle(), validateRequest.handle, ProfileController.update);
 
 export {router as userRouter};

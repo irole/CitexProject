@@ -36,8 +36,8 @@ router.use(AuthenticateApi.public);
 
 router.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 // APIs
-router.use('/api', cors(), apiLimiter, publicRouter);
-router.use('/api', cors(), AuthenticateApi.private, apiLimiter, privateRouter);
+router.use('/', cors(), apiLimiter, publicRouter);
+router.use('/', cors(), AuthenticateApi.private, apiLimiter, privateRouter);
 
 // Error 404
 router.all('*', (req, res, next) => {
